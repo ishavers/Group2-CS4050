@@ -23,7 +23,6 @@ public class SortGUI {
 	public static double insertionTime = 0.0;
 	//a variable that holds the amount of time for the quick sort takes to execute
 	public static double quickTime = 0.0;
-
 	//a variable that holds the amount of time for the selection sort takes to execute
 	public static double selectionTime = 0.0;
 	//a variable that holds the amount of time for the recursive merge sort takes to execute
@@ -39,7 +38,6 @@ public class SortGUI {
 	public boolean Insertion_Done = false;
 	//Boolean variable that is made to keep track whether or not the quick sort has already been used
 	public boolean Quick_Done = false;
-
 	//Boolean variable that is made to keep track whether or not the selection sort has already been used
 	public boolean Selection_Done = false;
 	//Boolean variable that is made to keep track whether or not the recursive merge sort has already been used
@@ -78,7 +76,6 @@ public class SortGUI {
 		JRadioButton insertion = new JRadioButton("Insertion");
 		//making a quick button with a text "Bubble" on it
 		JRadioButton quick = new JRadioButton("Quick");
-
 		//making a selection button with a text "Selection" on it
 		JRadioButton selection = new JRadioButton("Selection");
 		//making a recursive merge button with a text "Merge Recursive" on it
@@ -100,7 +97,6 @@ public class SortGUI {
 		//A label that displays the time it took for the quick sort took to execute
 		JLabel quick_time_label = new JLabel("Quick Time");
 		JLabel quick_time_taken = new JLabel("");
-
 		//A label that displays the time it took for the Selection sort took to execute 
 		JLabel selection_time_label = new JLabel("Selection Time");
 		JLabel selection_time_taken = new JLabel(""); 
@@ -123,7 +119,6 @@ public class SortGUI {
 			insertion_time_taken.setForeground(Color.RED);
 			//The time displayed for quick sort will be the colour red
 			quick_time_taken.setForeground(Color.RED);
-
 			//The time displayed for selection sort will be the colour red
 			selection_time_taken.setForeground(Color.RED);
 			//The time displayed for recursive merge sort will be the colour red
@@ -139,7 +134,6 @@ public class SortGUI {
 			insertion.setForeground(Color.BLUE);
 			//The quick button text will be the colour blue
 			quick.setForeground(Color.BLUE);
-
 			//The selection button text will be the colour blue
 			selection.setForeground(Color.BLUE);
 			//The recursive merge button text will be the colour blue
@@ -161,7 +155,6 @@ public class SortGUI {
 			radio_button_selection_Panel.add(insertion);
 			//Adding the quick button to the radio_button_selection_Panel
 			radio_button_selection_Panel.add(quick);
-
 			//Adding the selection button to the radio_button_selection_Panel
 			radio_button_selection_Panel.add(selection);
 			//Adding the recursive merge button to the radio_button_selection_Panel
@@ -192,7 +185,6 @@ public class SortGUI {
 			time_Panel.add(quick_time_label);
 			//Adding the quick_time_taken to the time_Panel
 			time_Panel.add(quick_time_taken);
-
 			//Adding the selection_time_label to the time_Panel
 			time_Panel.add(selection_time_label);
 			//Adding the selection_time_taken to the time_Panel
@@ -357,7 +349,6 @@ public class SortGUI {
 						Shell_Done = false;
 						Insertion_Done = false;
 						Quick_Done = false;
-
 						Recersive_Merge_Done = false;
 						Iterative_Merge_Done = false;
 						Selection_Done = false;
@@ -367,7 +358,6 @@ public class SortGUI {
 						shell_time_taken.setText("");
 						insertion_time_taken.setText("");
 						quick_time_taken.setText("");
-
 						selection_time_taken.setText("");
 						rmerge_time_taken.setText("");
 						imerge_time_taken.setText("");
@@ -375,41 +365,21 @@ public class SortGUI {
 					}
 					else {
 						Set_Available_Chooses(!Bubble_Done, !Shell_Done, !Insertion_Done, !Quick_Done,
-								!Recersive_Merge_Done, !Iterative_Merge_Done, !Selection_Done, false);
+								!Selection_Done, !Recersive_Merge_Done, !Iterative_Merge_Done, false);
 					}
-
-					/*else if (Recersive_Merge_Done && Iterative_Merge_Done) {
-						Set_Available_Chooses(true, false, false, false);
-
-					} else if (Selection_Done && Recersive_Merge_Done) {
-						
-						Set_Available_Chooses(false, false, true, false);
-
-					} else if (Selection_Done && Iterative_Merge_Done) {
-						Set_Available_Chooses(false, true, false, false);
-
-					} else if (Selection_Done) {
-						Set_Available_Chooses(false, true, true, false);
-
-					} else if (Recersive_Merge_Done) {
-						Set_Available_Chooses(true, false, true, false);
-
-					} else {
-						Set_Available_Chooses(true, true, false, false);
-
-					}*/
 				}
 			});
 
 		}
 
 		//A method that sets if the button are enabled or disabled
-		public void Set_Available_Chooses(boolean bubble_state, boolean insertion_state, boolean quick_state, boolean shell_state, boolean selection_state, boolean rmerge_state, boolean imerge_state, boolean reset_state) {
+		public void Set_Available_Chooses(boolean bubble_state, boolean shell_state, boolean insertion_state,
+										  boolean quick_state, boolean selection_state,
+										  boolean rmerge_state, boolean imerge_state, boolean reset_state) {
 			this.bubble.setEnabled(bubble_state);
 			this.shell.setEnabled(shell_state);
 			this.insertion.setEnabled(insertion_state);
 			this.quick.setEnabled(quick_state);
-
 			this.selection.setEnabled(selection_state);
 			this.rmerge.setEnabled(rmerge_state);
 			this.imerge.setEnabled(imerge_state);
