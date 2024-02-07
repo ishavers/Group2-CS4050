@@ -200,8 +200,6 @@ public class SortShow extends JPanel {
 
     //recursive merge sort method
     public void R_MergeSort(int first, int last){
-        Calendar start = Calendar.getInstance();
-
         if(first < last){
 
             //You need to complete this part.
@@ -214,10 +212,6 @@ public class SortShow extends JPanel {
         }
 
         paintComponent(this.getGraphics());
-
-        Calendar end = Calendar.getInstance();
-
-        SortGUI.rmergeTime = end.getTime().getTime() - start.getTime().getTime();
     }
 
 
