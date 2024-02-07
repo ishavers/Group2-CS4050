@@ -65,6 +65,8 @@ public class SortShow extends JPanel {
         lines_lengths[j] = temp;
     }
 
+    //////////////////////////////////////////////////////////////////////
+
     //The selectionSort method
     public void SelectionSort() {
         //getting the date and time when the selection sort starts
@@ -88,110 +90,109 @@ public class SortShow extends JPanel {
         return 1; //modify this line
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////
+    //Bubble sort method
+    public void bubbleSort() {
+        //getting the date and time when the bubble sort starts
+        Calendar start = Calendar.getInstance();
 
-	///////////////////////////////////////////////////////////////////
-	//Bubble sort method
-	public void bubbleSort(){
-		//getting the date and time when the bubble sort starts
-		Calendar start = Calendar.getInstance();
+        // Traverse the entire array n - 1 times.
+        for (int i = 0; i < total_number_of_lines - 1; i++) {
+            // Inner loop runs n - i times in order to traverse
+            // through the array (expect for the last i - 1).
+            for (int j = 0; j < total_number_of_lines - i - 1; j++) {
+                // If the curr element is greater than the next adj element, swap them.
+                if (lines_lengths[j] > lines_lengths[j + 1]) {
+                    swap(j, (j + 1));
+                }
+            }
+            //redrawing the lines_lengths
+            paintComponent(this.getGraphics());
+            //Causing a delay for 10ms
+            delay(10);
+        }
 
-		// Traverse the entire array n - 1 times.
-		for (int i = 0; i < total_number_of_lines - 1; i++) {
-			// Inner loop runs n - i times in order to traverse
-			// through the array (expect for the last i - 1).
-			for (int j = 0; j < total_number_of_lines - i - 1; j++) {
-				// If the curr element is greater than the next adj element, swap them.
-				if(lines_lengths[j] > lines_lengths[j + 1]) {
-					swap(j, (j + 1));
-				}
-			}
-			//redrawing the lines_lengths
-			paintComponent(this.getGraphics());
-			//Causing a delay for 10ms
-			delay(10);
-		}
+        Calendar end = Calendar.getInstance();
+        //getting the time it took for the bubble sort to execute
+        //subtracting the end time with the start time
+        SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
+    }
 
-		Calendar end = Calendar.getInstance();
-		//getting the time it took for the bubble sort to execute
-		//subtracting the end time with the start time
-		SortGUI.bubbleTime = end.getTime().getTime() - start.getTime().getTime();
-	}
+    //Shell sort method
+    public void shellSort() {
+        //getting the date and time when the shell sort starts
+        Calendar start = Calendar.getInstance();
 
-	//Shell sort method
-	public void shellSort(){
-		//getting the date and time when the shell sort starts
-		Calendar start = Calendar.getInstance();
+        int unsorted, i;
+        // Start with a big gap of n/2, then reduce the gap by 2 in each iteration.
+        for (int gap = total_number_of_lines / 2; gap > 0; gap /= 2) {
+            for (int begin = 0; begin < gap; begin++) {
+                // Do insertion sort based on the gap.
+                for (unsorted = begin + gap; unsorted <= total_number_of_lines - 1; unsorted += gap) {
+                    int firstUnsorted = lines_lengths[unsorted];
+                    for (i = unsorted - gap; (i >= begin) && (firstUnsorted < lines_lengths[i]); i -= gap) {
+                        lines_lengths[i + gap] = lines_lengths[i];
+                    }
+                    lines_lengths[i + gap] = firstUnsorted;
 
-		int unsorted, i;
-		// Start with a big gap of n/2, then reduce the gap by 2 in each iteration.
-		for (int gap =  total_number_of_lines / 2; gap > 0; gap /= 2) {
-			for (int begin = 0; begin < gap; begin++) {
-				// Do insertion sort based on the gap.
-				for (unsorted = begin + gap; unsorted <= total_number_of_lines - 1; unsorted += gap) {
-					int firstUnsorted = lines_lengths[unsorted];
-					for (i = unsorted - gap; (i >= begin) && (firstUnsorted < lines_lengths[i]); i -= gap) {
-						lines_lengths[i + gap] = lines_lengths[i];
-					}
-					lines_lengths[i + gap] = firstUnsorted;
+                    //redrawing the lines_lengths
+                    paintComponent(this.getGraphics());
+                    //Causing a delay for 2ms
+                    delay(2);
+                }
+            }
+        }
 
-					//redrawing the lines_lengths
-					paintComponent(this.getGraphics());
-					//Causing a delay for 2ms
-					delay(2);
-				}
-			}
-		}
+        Calendar end = Calendar.getInstance();
+        //getting the time it took for the shell sort to execute
+        //subtracting the end time with the start time
+        SortGUI.shellTime = end.getTime().getTime() - start.getTime().getTime();
+    }
 
-		Calendar end = Calendar.getInstance();
-		//getting the time it took for the shell sort to execute
-		//subtracting the end time with the start time
-		SortGUI.shellTime = end.getTime().getTime() - start.getTime().getTime();
-	}
-
-	//Insertion sort method
-	public void insertionSort(){
-		//getting the date and time when the bubble sort starts
-		Calendar start = Calendar.getInstance();
+    //Insertion sort method
+    public void insertionSort() {
+        //getting the date and time when the bubble sort starts
+        Calendar start = Calendar.getInstance();
 
 
-		//redrawing the lines_lengths
-		//paintComponent(this.getGraphics());
-		//Causing a delay for 10ms
-		//delay(10);
+        //redrawing the lines_lengths
+        //paintComponent(this.getGraphics());
+        //Causing a delay for 10ms
+        //delay(10);
 
-		Calendar end = Calendar.getInstance();
-		//getting the time it took for the bubble sort to execute
-		//subtracting the end time with the start time
-		SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
-	}
+        Calendar end = Calendar.getInstance();
+        //getting the time it took for the bubble sort to execute
+        //subtracting the end time with the start time
+        SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
+    }
 
-	//Quick sort method
-	public void quickSort(){
-		//getting the date and time when the bubble sort starts
-		Calendar start = Calendar.getInstance();
+    //Quick sort method
+    public void quickSort() {
+        //getting the date and time when the bubble sort starts
+        Calendar start = Calendar.getInstance();
 
 
-		//redrawing the lines_lengths
-		//paintComponent(this.getGraphics());
-		//Causing a delay for 10ms
-		//delay(10);
+        //redrawing the lines_lengths
+        //paintComponent(this.getGraphics());
+        //Causing a delay for 10ms
+        //delay(10);
 
-		Calendar end = Calendar.getInstance();
-		//getting the time it took for the bubble sort to execute
-		//subtracting the end time with the start time
-		SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
-	}
+        Calendar end = Calendar.getInstance();
+        //getting the time it took for the bubble sort to execute
+        //subtracting the end time with the start time
+        SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
+    }
 
     //recursive merge sort method
     public void R_MergeSort() {
         //getting the date and time when the recursive merge sort starts
         Calendar start = Calendar.getInstance();
         //assigning the size for the tempArray below
+        tempArray = new int[total_number_of_lines];
 
         //You need to complete this part.
-        R_MergeSort(0,total_number_of_lines-1);
+        R_MergeSort(0, total_number_of_lines - 1);
         Calendar end = Calendar.getInstance();
+
         //getting the time it took for the iterative merge sort to execute
         //subtracting the end time with the start time
         SortGUI.rmergeTime = end.getTime().getTime() - start.getTime().getTime();
@@ -199,56 +200,64 @@ public class SortShow extends JPanel {
     }
 
     //recursive merge sort method
-    public void R_MergeSort(int first, int last){
-        if(first < last){
+    public void R_MergeSort(int first, int last) {
+        if (first < last) {
 
             //You need to complete this part.
-            int mid = (first+last)/2; //finds middle using first and last
-            R_MergeSort(first,mid); //recursively calls R_MergeSort on first half of subarray
-            R_MergeSort(mid+1,last); //recursively calls R_MergeSort on first half of subarray
-            R_Merge(first,mid,last); //merges subarrays
+            int mid = (first + last) / 2; //finds middle using first and last
+            R_MergeSort(first, mid); //recursively calls R_MergeSort on first half of subarray
+            R_MergeSort(mid + 1, last); //recursively calls R_MergeSort on first half of subarray
+            R_Merge(first, mid, last); //merges subarrays
             //Causing a delay for 10ms
             delay(10);
         }
-
+        //redrawing the lines length
         paintComponent(this.getGraphics());
     }
 
 
     //recursive merge sort method
-    public void R_Merge(int first, int mid, int last){
+    public void R_Merge(int first, int mid, int last) {
 
         //You need to complete this part.
         int leftHalfIndex, rightHalfIndex;
         leftHalfIndex = first;
-        rightHalfIndex = mid+1;
+        rightHalfIndex = mid + 1;
         int i = first;
 
-        while(leftHalfIndex < mid && rightHalfIndex < last){
-            if(lines_lengths[leftHalfIndex]<=lines_lengths[rightHalfIndex]){
+        // Merge both subarrays from lines_length into tempArray, sorting at each step.
+        while (leftHalfIndex <= mid && rightHalfIndex <= last) {
+            if (lines_lengths[leftHalfIndex] < lines_lengths[rightHalfIndex]) {
                 tempArray[i] = lines_lengths[leftHalfIndex];
                 leftHalfIndex++;
-            }
-            else{
+            } else {
                 tempArray[i] = lines_lengths[rightHalfIndex];
                 rightHalfIndex++;
             }
             i++;
         }
 
+        //redrawing the lines length
         paintComponent(this.getGraphics());
 
+        // Copy remaining elements of the left subarray if any.
+        while (leftHalfIndex <= mid) {
+            tempArray[i] = lines_lengths[leftHalfIndex];
+            leftHalfIndex++;
+            i++;
+        }
 
-        for (i = first; i < last; i++)
+        // Copy remaining elements of the right subarray if any.
+        while (rightHalfIndex <= last) {
+            tempArray[i] = lines_lengths[rightHalfIndex];
+            rightHalfIndex++;
+            i++;
+        }
+
+        // Copy elements from tempArray (both subarrays) to lines_length (original)
+        for (i = first; i <= last; i++)
             lines_lengths[i] = tempArray[i];
-
-
-
     }
-
-    //
-
-    //////////////////////////////////////////////////////////////////////////////////////////
 
     //iterative merge sort method
     public void I_MergeSort() {
