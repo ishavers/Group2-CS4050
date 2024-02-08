@@ -174,16 +174,40 @@ public class SortShow extends JPanel {
         //getting the date and time when the bubble sort starts
         Calendar start = Calendar.getInstance();
 
+        int index;
+        int first = 0;
+        int last = total_number_of_lines - 1;
+        int unsortedElement;
+
+        //scans through data set going to each unsorted element
+        for(index=first+1;index<=last;index++){
+            unsortedElement = lines_lengths[index];
+            insertInOrder(unsortedElement,first,index-1);
+        }
+
 
         //redrawing the lines_lengths
-        //paintComponent(this.getGraphics());
+        paintComponent(this.getGraphics());
         //Causing a delay for 10ms
-        //delay(10);
+        delay(10);
 
         Calendar end = Calendar.getInstance();
         //getting the time it took for the bubble sort to execute
         //subtracting the end time with the start time
         SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
+    }
+
+    public void insertInOrder(int element , int first, int last){
+        int index = last;
+
+        // "slides" the data set over while element is smaller than the current index
+        while(index>=first && element<lines_lengths[index]){
+            lines_lengths[index + 1] = lines_lengths[index];
+            paintComponent(this.getGraphics());
+            index--;
+        }
+        // places element into its sorted order position after the data set "slides" over
+        lines_lengths[index+1] = element;
     }
 
     //Quick sort method
