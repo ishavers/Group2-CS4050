@@ -1,5 +1,6 @@
 /**
  * @author Group 2
+ * @reference Ouda
  */
 
 //importing the libraries that will be needed in this program
@@ -71,9 +72,23 @@ public class SortShow extends JPanel {
     public void SelectionSort() {
         //getting the date and time when the selection sort starts
         Calendar start = Calendar.getInstance();
-        //Using the selection sort to lines_lengths sort the array
 
-        //You need to complete this part.
+        //Using the selection sort to lines_lengths sort the array
+        int arrLength = lines_lengths.length;
+
+        //Iterate through the array to place the smallest number
+        for (int i = 0; i < arrLength - 1; i++){
+            int minIndex = i; // index of min element
+
+            //Search for and swap the smallest number
+            minIndex = getIndexOfSmallest(minIndex, arrLength - 1);
+            swap(i, minIndex);
+
+            //redrawing the lines_lengths
+            paintComponent(this.getGraphics());
+            //Causing a delay for 10ms
+            delay(10);
+        }
 
         //getting the date and time when the selection sort ends
         Calendar end = Calendar.getInstance();
@@ -84,10 +99,16 @@ public class SortShow extends JPanel {
 
     //this method gets the smallest element in the array of lines_lengths
     public int getIndexOfSmallest(int first, int last) {
+        int minIndex = first;
 
-        //You need to complete this part.
+        //Searching for the smallest number
+        for (int i = minIndex + 1; i <= last; i++){
+            if (lines_lengths[i] < lines_lengths[minIndex]){
+                minIndex = i;
+            }
+        }
 
-        return 1; //modify this line
+        return minIndex; //modify this line
     }
 
     //Bubble sort method
@@ -166,20 +187,61 @@ public class SortShow extends JPanel {
     }
 
     //Quick sort method
+    //It is a wrapper method for the recursive function
     public void quickSort() {
         //getting the date and time when the bubble sort starts
         Calendar start = Calendar.getInstance();
 
-
-        //redrawing the lines_lengths
-        //paintComponent(this.getGraphics());
-        //Causing a delay for 10ms
-        //delay(10);
+        // Call the recursive quickSort.
+        tempArray = new int[lines_lengths.length];
+        int high = lines_lengths.length - 1;
+        quickSort(0, high);
 
         Calendar end = Calendar.getInstance();
         //getting the time it took for the bubble sort to execute
         //subtracting the end time with the start time
         SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
+    }
+
+    //Recursive method for
+    public void quickSort(int low, int high) {
+        // Base case
+        if (low < high) {
+            int pIndex = partition(low, high);
+
+            // recursive call on the left of pivot
+            quickSort(low, pIndex - 1);
+
+            //redrawing the lines_lengths
+            paintComponent(this.getGraphics());
+            //Causing a delay for 10ms
+            delay(10);
+
+            // recursive call on the right of pivot
+            quickSort(pIndex + 1, high);
+        }
+    }
+
+    //Partition the array int L,E,G
+    public int partition(int first, int last) {
+        //select the last element as the pivot
+        int pivot = lines_lengths[last];
+        int i = (first - 1);
+
+        // compare each element with pivot
+        for (int j = first; j < last; j++) {
+
+            if (lines_lengths[j] <= pivot) {
+                i++;
+                // swapping element at i with element at j
+                swap(i, j);
+            }
+        }
+
+        // swap pivot and greater element
+        swap(i + 1, last);
+
+        return (i + 1);
     }
 
     //recursive merge sort method
@@ -196,7 +258,6 @@ public class SortShow extends JPanel {
         //getting the time it took for the iterative merge sort to execute
         //subtracting the end time with the start time
         SortGUI.rmergeTime = end.getTime().getTime() - start.getTime().getTime();
-
     }
 
     //recursive merge sort method
