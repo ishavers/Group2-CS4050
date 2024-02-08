@@ -124,10 +124,10 @@ public class SortShow extends JPanel {
                 // If the curr element is greater than the next adj element, swap them.
                 if (lines_lengths[j] > lines_lengths[j + 1]) {
                     swap(j, (j + 1));
+                    paintComponent(this.getGraphics());
                 }
             }
             //redrawing the lines_lengths
-            paintComponent(this.getGraphics());
             //Causing a delay for 10ms
             delay(10);
         }
