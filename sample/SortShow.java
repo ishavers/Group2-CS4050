@@ -108,6 +108,10 @@ public class SortShow extends JPanel {
             }
         }
 
+        //redrawing the lines_lengths
+        paintComponent(this.getGraphics());
+        //Causing a delay for 10ms
+        delay(10);
         return minIndex; //modify this line
     }
 
