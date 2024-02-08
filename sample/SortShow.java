@@ -128,12 +128,14 @@ public class SortShow extends JPanel {
                 // If the curr element is greater than the next adj element, swap them.
                 if (lines_lengths[j] > lines_lengths[j + 1]) {
                     swap(j, (j + 1));
+
+                    //redrawing the lines_lengths
                     paintComponent(this.getGraphics());
                 }
             }
-            //redrawing the lines_lengths
-            //Causing a delay for 10ms
-            delay(10);
+
+            //Causing a delay for 6ms
+            delay(6);
         }
 
         Calendar end = Calendar.getInstance();
@@ -161,8 +163,8 @@ public class SortShow extends JPanel {
 
                     //redrawing the lines_lengths
                     paintComponent(this.getGraphics());
-                    //Causing a delay for 2ms
-                    delay(2);
+                    //Causing a delay for 4ms
+                    delay(4);
                 }
             }
         }
@@ -175,7 +177,7 @@ public class SortShow extends JPanel {
 
     //Insertion sort method
     public void insertionSort() {
-        //getting the date and time when the bubble sort starts
+        //getting the date and time when the insertion sort starts
         Calendar start = Calendar.getInstance();
 
         int index;
@@ -184,11 +186,10 @@ public class SortShow extends JPanel {
         int unsortedElement;
 
         //scans through data set going to each unsorted element
-        for(index=first+1;index<=last;index++){
+        for(index = first + 1; index <= last; index++){
             unsortedElement = lines_lengths[index];
             insertInOrder(unsortedElement,first,index-1);
         }
-
 
         //redrawing the lines_lengths
         paintComponent(this.getGraphics());
@@ -196,16 +197,16 @@ public class SortShow extends JPanel {
         delay(10);
 
         Calendar end = Calendar.getInstance();
-        //getting the time it took for the bubble sort to execute
+        //getting the time it took for the insertion sort to execute
         //subtracting the end time with the start time
         SortGUI.insertionTime = end.getTime().getTime() - start.getTime().getTime();
     }
 
-    public void insertInOrder(int element , int first, int last){
+    public void insertInOrder(int element, int first, int last){
         int index = last;
 
         // "slides" the data set over while element is smaller than the current index
-        while(index>=first && element<lines_lengths[index]){
+        while(index >= first && element < lines_lengths[index]){
             lines_lengths[index + 1] = lines_lengths[index];
             paintComponent(this.getGraphics());
             index--;
@@ -217,7 +218,7 @@ public class SortShow extends JPanel {
     //Quick sort method
     //It is a wrapper method for the recursive function
     public void quickSort() {
-        //getting the date and time when the bubble sort starts
+        //getting the date and time when the quick sort starts
         Calendar start = Calendar.getInstance();
 
         // Call the recursive quickSort.
@@ -226,12 +227,12 @@ public class SortShow extends JPanel {
         quickSort(0, high);
 
         Calendar end = Calendar.getInstance();
-        //getting the time it took for the bubble sort to execute
+        //getting the time it took for the quick sort to execute
         //subtracting the end time with the start time
         SortGUI.quickTime = end.getTime().getTime() - start.getTime().getTime();
     }
 
-    //Recursive method for
+    //Recursive method for quick sort
     public void quickSort(int low, int high) {
         // Base case
         if (low < high) {
@@ -240,17 +241,12 @@ public class SortShow extends JPanel {
             // recursive call on the left of pivot
             quickSort(low, pIndex - 1);
 
-            //redrawing the lines_lengths
-            paintComponent(this.getGraphics());
-            //Causing a delay for 10ms
-            delay(10);
-
             // recursive call on the right of pivot
             quickSort(pIndex + 1, high);
         }
     }
 
-    //Partition the array int L,E,G
+    //Partition the array into L,E,G
     public int partition(int first, int last) {
         //select the last element as the pivot
         int pivot = lines_lengths[last];
@@ -258,16 +254,25 @@ public class SortShow extends JPanel {
 
         // compare each element with pivot
         for (int j = first; j < last; j++) {
-
             if (lines_lengths[j] <= pivot) {
                 i++;
                 // swapping element at i with element at j
                 swap(i, j);
+
+                //redrawing the lines_lengths
+                paintComponent(this.getGraphics());
+                //Causing a delay for 7ms
+                delay(7);
             }
         }
 
         // swap pivot and greater element
         swap(i + 1, last);
+
+        //redrawing the lines_lengths
+        paintComponent(this.getGraphics());
+        //Causing a delay for 7ms
+        delay(7);
 
         return (i + 1);
     }
@@ -279,8 +284,9 @@ public class SortShow extends JPanel {
         //assigning the size for the tempArray below
         tempArray = new int[total_number_of_lines];
 
-        //You need to complete this part.
+        //Calling the mergeSort with correct arguments.
         R_MergeSort(0, total_number_of_lines - 1);
+
         Calendar end = Calendar.getInstance();
 
         //getting the time it took for the iterative merge sort to execute
@@ -290,28 +296,22 @@ public class SortShow extends JPanel {
 
     //recursive merge sort method
     public void R_MergeSort(int first, int last) {
+        // Check for an array of at least size 1.
         if (first < last) {
-
-            //You need to complete this part.
+            // Divide the array into two subarrays, and merge them in sorted order
             int mid = (first + last) / 2; //finds middle using first and last
             R_MergeSort(first, mid); //recursively calls R_MergeSort on first half of subarray
             R_MergeSort(mid + 1, last); //recursively calls R_MergeSort on first half of subarray
-            R_Merge(first, mid, last); //merges subarrays
-            //Causing a delay for 10ms
-            delay(10);
+            R_Merge(first, mid, last); //merges subarrays.
         }
-        //redrawing the lines length
-        paintComponent(this.getGraphics());
     }
 
 
     //recursive merge sort method
     public void R_Merge(int first, int mid, int last) {
-
         //You need to complete this part.
-        int leftHalfIndex, rightHalfIndex;
-        leftHalfIndex = first;
-        rightHalfIndex = mid + 1;
+        int leftHalfIndex = first;
+        int rightHalfIndex = mid + 1;
         int i = first;
 
         // Merge both subarrays from lines_length into tempArray, sorting at each step.
@@ -328,6 +328,8 @@ public class SortShow extends JPanel {
 
         //redrawing the lines length
         paintComponent(this.getGraphics());
+        //Causing a delay for 10ms
+        delay(10);
 
         // Copy remaining elements of the left subarray if any.
         while (leftHalfIndex <= mid) {
@@ -346,6 +348,11 @@ public class SortShow extends JPanel {
         // Copy elements from tempArray (both subarrays) to lines_length (original)
         for (i = first; i <= last; i++)
             lines_lengths[i] = tempArray[i];
+
+        //redrawing the lines length
+        paintComponent(this.getGraphics());
+        //Causing a delay for 10ms
+        delay(10);
     }
 
     //iterative merge sort method
@@ -396,8 +403,8 @@ public class SortShow extends JPanel {
             beginSegment1 = endSegment2 + 1;
             //redrawing the lines_lengths
             paintComponent(this.getGraphics());
-            //Causing a delay for 10ms
-            delay(10);
+            //Causing a delay for 20ms
+            delay(20);
         }
         // Returns index of last merged pair
         return beginSegment1;
