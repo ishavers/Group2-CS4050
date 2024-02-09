@@ -1,6 +1,13 @@
 /**
  *
  * @author Group 2
+ * @reference Ouda
+ *
+ * Implements many sorting algorithms on a GUI in JavaFX. They include:
+ * Recursive mergesort, iterative mergesort, quick sort, shell sort,
+ * insertion sort, selection sort, and bubble sort.
+ *
+ * This class implements the GUI.
  */
 
 //importing the libraries that will be needed in this program

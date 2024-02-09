@@ -1,6 +1,9 @@
 /**
  * @author Group 2
  * @reference Ouda
+ *
+ * This class implements and utilizes the various sorting algorithms
+ * to print out the lines shown on the GUI in sorted order.
  */
 
 //importing the libraries that will be needed in this program
